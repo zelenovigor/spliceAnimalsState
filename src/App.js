@@ -1,26 +1,46 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { Component } from 'react';
 import './App.css';
+import Animal from './Animal'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+class App extends Component {
+  
+  state = {
+    animals: [
+      {name: 'panda', color:'white'},
+      {name: 'tiger', color:'yellow'}, 
+      {name:'bat', color:'black'},
+      {name:'possum', color:'brown'}, 
+      {name:'cat', color:'orange'}, 
+      {name:'rat', color:'dark grey'}
+    ]
+  }
+
+  deleteAnimal = (i) => {
+    console.log('delete ', i)
+    let newAnimalList = [...this.state.animals]
+    newAnimalList.splice(i,1)
+    this.setState({
+      animals:newAnimalList
+    })
+
+  }
+  
+  render() { /**Put javascript in here */
+    //this.doSomething('cool') This is on page load 
+    return (
+      <div> 
+        <ul>
+          <Animal 
+            animalProps={ this.state.animals } 
+            deleteTheAnimal= {this.deleteAnimal}
+          />
+        </ul>
+
+      </div>
+    );
+  }
 }
 
 export default App;
+
